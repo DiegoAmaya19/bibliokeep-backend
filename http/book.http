@@ -1,0 +1,14 @@
+### Obtener todos los libros del usuario
+GET http://localhost:8080/api/books
+user-id: f53b6038-52dd-45de-a123-1ebcd597efd5
+
+###
+
+### Obtener un libro por ID
+GET http://localhost:8080/api/books
+X-User-Id: f53b6038-52dd-45de-a123-1ebcd597efd5
+
+###
+GET  http://localhost:8080/api/books
+Authorization: Bearer f0bb3caf-9407-4f2b-802b-33ebb24959cf
+Accept: application/json

@@ -1,0 +1,16 @@
+###
+GET http://localhost:8080/api/users/all
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJYLVVzZXItSWQiOiJmNTNiNjAzOC01MmRkLTQ1ZGUtYTEyMy0xZWJjZDU5N2VmZDUiLCJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1YiI6ImRpZWdvQGV4YW1wbGUuY29tIiwiaWF0IjoxNzcxMjA3NjE5LCJleHAiOjE3NzEyOTQwMTl9.15Acc8M7VLbbpw_tn7z3dXFyFEQ5rEVj22Ks8CVWDfJZCwjNcWiXpUAl8P3lnKZk
+
+
+###
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
+
+{
+    "email": "carlos@gmail.com",
+    "password": "carlos123",
+    "preferences": ["Fantasía", "Accion", "Suspense"],
+    "annualGoal": 5,
+    "rolesId": [2]
+}
