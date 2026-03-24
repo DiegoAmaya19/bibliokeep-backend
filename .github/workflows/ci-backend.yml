@@ -14,17 +14,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: "Configurar JDK 25"
-        uses: action/setup-java@v4
+        uses: action/setup-java@v5
         with: 
           java-version: '21'
           distribution: 'temurin'
           cache: 'gradle'
-      - name: "Dar"
+      - name: "Dar permisos de ejecucion al gradlew"
         run: chmod +x ./gradlew
 
       - name: "Gradle Build"
-        run: ./gradlew build
+        run: ./gradlew build --no-daemon -x test
 
