@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: "Configurar JDK 25"
+      - name: "Configurar JDK 21"
         uses: action/setup-java@v5
         with: 
           java-version: '21'
@@ -27,4 +27,23 @@ jobs:
 
       - name: "Gradle Build"
         run: ./gradlew build --no-daemon -x tests
+
+      - name: "Obtener"
+        id: get_version
+        run: echo "VERSION=$(./gradle properties | grep ^version | awk '{print2}')" >> $GITHUB_OUTPUT
+
+      - name: "Guardar el JAR"
+        uses: actions/upload-artifac@v6
+        with:
+          name: backend-binary
+          path: build/libs/*.jar
+
+  publish-release:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      
 
