@@ -2,6 +2,7 @@ package com.devsenior.diego.bibliokeep.config;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -20,6 +21,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+   @Value("${app.cors.allowed-origins}")
+   private String allowedOrigins;
 
    @Bean
    SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) {
@@ -41,8 +45,9 @@ public class SecurityConfig {
    // Se coloca en el SecurityFilterChain
    private CorsConfigurationSource corsConfigurationSource() {
       var corsConfiguration = new CorsConfiguration();
-
-      corsConfiguration.setAllowedOrigins(List.of("http://localhost:4200")); // Nota: para que acceda todo el mundo "*"
+      
+      // Nota: para que acceda todoo el mundo "*"
+      corsConfiguration.setAllowedOrigins(List.of(allowedOrigins.split(","))); 
       corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTION"));
       corsConfiguration.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Tenant-ID", "X-User-id"));
       corsConfiguration.setAllowCredentials(true);
