@@ -1,11 +1,11 @@
 # -- Stage 1 - Builder
 # Perform the extraction in a separate builder container
-FROM eclipse-temurin:21-jre-alpine-3.23 AS builder
+FROM eclipse-temurin:21-jdk-alpine AS builder
 WORKDIR /builder
 
 # Copia de Gradle al contenedor
 COPY gradlew .
-COPY gradle .gradle
+COPY gradle/ gradle/
 COPY build.gradle .
 COPY settings.gradle .
 
@@ -24,7 +24,7 @@ RUN java -Djarmode=tools -jar build/libs/*.jar extract --layers --destination ex
 # -- Stage 2 - Runner
 
 # This is the runtime container
-FROM eclipse-temurin:21-jre-alpine-3.23
+FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /application
 # Copy the extracted jar contents from the builder container into the working directory in the runtime container
