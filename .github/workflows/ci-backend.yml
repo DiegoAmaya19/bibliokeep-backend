@@ -45,5 +45,22 @@ jobs:
       contents: write
 
     steps:
-      
+      - uses: actions/checkout@v6
 
+      - name: "Descargar el JAR"
+        uses: actions/download-artifact@v6
+        with:
+          name: backend-binary
+          path: ./release-assets
+
+      - name: "Crear el release de Github"
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ needs.build-and-test.outputs.version }}-${{ github.run_number }}
+          name: Release v${{ needs.build-and-test.outputs.version }}
+          files: ./release-assets/*.jar
+          body: |
+            ## Automated Release
+            - Commit: ${{ github.sha }}
+            - Status: Verified by CI
+            - Environment: Java 21 / Spring Boot
