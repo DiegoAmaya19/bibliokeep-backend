@@ -43,4 +43,6 @@ EXPOSE 8080
 # Start the application jar - this is not the uber jar used by the builder
 # This jar only contains application code and references to the extracted jar files
 # This layout is efficient to start up and AOT cache (and CDS) friendly
-ENTRYPOINT ["sh", "-c", "java org.springframework.boot.loader.launch.JarLauncher"]
+# ENTRYPOINT ["sh", "-c", "java org.springframework.boot.loader.launch.JarLauncher"]
+
+ENTRYPOINT [ "java", "-jar", "*.jar" ]
